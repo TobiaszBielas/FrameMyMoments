@@ -1,5 +1,6 @@
 package com.frameMyMoments.frameMyMoments.model.dao;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.*;
@@ -13,6 +14,9 @@ public class UserDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne()
+    @JoinColumn()
+    @JsonProperty()
     private User user;
     private String firstName;
     private String lastName;

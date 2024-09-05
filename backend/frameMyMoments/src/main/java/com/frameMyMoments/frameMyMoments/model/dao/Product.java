@@ -1,5 +1,6 @@
 package com.frameMyMoments.frameMyMoments.model.dao;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,13 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne()
+    @JoinColumn()
+    @JsonProperty()
     private ProductCategory category;
+    @ManyToOne()
+    @JoinColumn()
+    @JsonProperty()
     private ProductSize size;
     private String name;
     private String description;

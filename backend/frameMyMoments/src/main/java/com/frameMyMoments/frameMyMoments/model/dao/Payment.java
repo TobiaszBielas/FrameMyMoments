@@ -13,7 +13,6 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private OrderDetail order;
     private float amount;
     private String provider;
     private LocalDateTime created;

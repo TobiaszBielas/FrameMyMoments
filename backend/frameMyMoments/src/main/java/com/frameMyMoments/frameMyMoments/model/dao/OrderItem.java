@@ -1,4 +1,5 @@
 package com.frameMyMoments.frameMyMoments.model.dao;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,13 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne()
+    @JoinColumn()
+    @JsonProperty()
     private OrderDetail order;
+    @ManyToOne()
+    @JoinColumn()
+    @JsonProperty()
     private Product product;
     private Long quantity;
 }
