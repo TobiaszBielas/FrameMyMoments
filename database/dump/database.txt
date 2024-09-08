@@ -1,0 +1,105 @@
+CREATE TABLE "users" (
+  "id" integer PRIMARY KEY,
+  "username" varchar,
+  "email" varchar,
+  "password" varchar
+);
+
+CREATE TABLE "user_details" (
+  "id" integer PRIMARY KEY,
+  "user_id" integer,
+  "first_name" varchar,
+  "last_name" varchar,
+  "phone_number" varchar,
+  "postal_code" varchar,
+  "city" varchar,
+  "street" varchar,
+  "house_number" varchar,
+  "flat_number" varchar
+);
+
+CREATE TABLE "products" (
+  "id" integer PRIMARY KEY,
+  "category_id" integer,
+  "product_size_id" integer,
+  "name" varchar,
+  "description" varchar,
+  "quantity" integer,
+  "price" float
+);
+
+CREATE TABLE "product_size" (
+  "id" integer PRIMARY KEY,
+  "shape" float,
+  "height" float,
+  "width" float,
+  "diameter" float
+);
+
+CREATE TABLE "product_reviews" (
+  "id" integer PRIMARY KEY,
+  "product_id" integer,
+  "review" varchar
+);
+
+CREATE TABLE "product_category" (
+  "id" integer PRIMARY KEY,
+  "name" varchar
+);
+
+CREATE TABLE "cart_items" (
+  "id" integer PRIMARY KEY,
+  "product_id" integer,
+  "session_id" integer,
+  "quantity" integer
+);
+
+CREATE TABLE "shoping_session" (
+  "id" integer PRIMARY KEY,
+  "user_id" integer,
+  "total_price" float
+);
+
+CREATE TABLE "order_items" (
+  "id" integer PRIMARY KEY,
+  "order_id" integer,
+  "product_id" integer,
+  "quantity" integer
+);
+
+CREATE TABLE "order_details" (
+  "id" integer PRIMARY KEY,
+  "user_id" integer,
+  "payment_id" integer,
+  "totapl_price" float
+);
+
+CREATE TABLE "payment" (
+  "id" integer PRIMARY KEY,
+  "amount" float,
+  "provider" varchar,
+  "created_at" timestamp,
+  "finished_at" timestamp
+);
+
+ALTER TABLE "user_details" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "products" ADD FOREIGN KEY ("category_id") REFERENCES "product_category" ("id");
+
+ALTER TABLE "products" ADD FOREIGN KEY ("product_size_id") REFERENCES "product_size" ("id");
+
+ALTER TABLE "product_reviews" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
+
+ALTER TABLE "shoping_session" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "cart_items" ADD FOREIGN KEY ("session_id") REFERENCES "shoping_session" ("id");
+
+ALTER TABLE "cart_items" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
+
+ALTER TABLE "order_details" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "order_details" ADD FOREIGN KEY ("payment_id") REFERENCES "payment" ("id");
+
+ALTER TABLE "order_items" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
+
+ALTER TABLE "order_items" ADD FOREIGN KEY ("order_id") REFERENCES "order_details" ("id");
