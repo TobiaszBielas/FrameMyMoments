@@ -1,4 +1,4 @@
-package com.frameMyMoments.model.dao;
+package com.frameMyMoments.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

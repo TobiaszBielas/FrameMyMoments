@@ -1,8 +1,10 @@
-package com.frameMyMoments.model.dao;
+package com.frameMyMoments.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "SHOPPING_SESSION")
@@ -14,8 +16,8 @@ public class ShoppingSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne()
-    @JoinColumn()
+    @JoinColumn(name = "user_id")
     @JsonProperty()
     private User user;
-    private float totalPrice;
+    private BigDecimal totalPrice;
 }

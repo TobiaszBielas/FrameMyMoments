@@ -1,6 +1,6 @@
 package com.frameMyMoments.repository;
 
-import com.frameMyMoments.model.dao.Product;
+import com.frameMyMoments.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

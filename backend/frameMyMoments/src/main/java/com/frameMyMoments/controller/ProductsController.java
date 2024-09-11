@@ -1,6 +1,6 @@
 package com.frameMyMoments.controller;
 
-import com.frameMyMoments.model.dto.ProductsDTO;
+import com.frameMyMoments.dto.ProductDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,12 +30,12 @@ public class ProductsController {
     }
 
     @PostMapping("/addProduct")
-    public ResponseEntity<?> addProduct(@RequestBody ProductsDTO products){
+    public ResponseEntity<?> addProduct(@RequestBody ProductDTO products){
         return null;
     }
 
     @PostMapping("/updateProduct/{id}")
-    public ResponseEntity<?> UpdateProduct(@RequestBody ProductsDTO products, @PathVariable("id") Long productId){
+    public ResponseEntity<?> UpdateProduct(@RequestBody ProductDTO products, @PathVariable("id") Long productId){
         return null;
     }
 

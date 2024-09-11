@@ -1,18 +1,15 @@
-package com.frameMyMoments.model.dao;
-
+package com.frameMyMoments.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "PRODUCT_CATEGORY")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
-    private String email;
-    private String password;
+    private String name;
 }

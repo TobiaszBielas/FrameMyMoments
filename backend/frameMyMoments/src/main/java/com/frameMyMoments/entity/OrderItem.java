@@ -1,28 +1,24 @@
-package com.frameMyMoments.model.dao;
-
+package com.frameMyMoments.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "PRODUCTS")
+@Table(name = "ORDER_ITEMS")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne()
-    @JoinColumn()
+    @JoinColumn(name = "order_id")
     @JsonProperty()
-    private ProductCategory category;
+    private OrderDetails orderDetails;
     @ManyToOne()
-    @JoinColumn()
+    @JoinColumn(name = "product_id")
     @JsonProperty()
-    private ProductSize size;
-    private String name;
-    private String description;
+    private Product product;
     private Long quantity;
-    private float price;
 }

@@ -1,5 +1,6 @@
-package com.frameMyMoments.model.dao;
+package com.frameMyMoments.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,7 +14,8 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private float amount;
+    @Column(nullable = false)
+    private BigDecimal amount;
     private String provider;
     private LocalDateTime created;
     private LocalDateTime finished;

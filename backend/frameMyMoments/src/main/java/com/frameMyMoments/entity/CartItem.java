@@ -1,4 +1,4 @@
-package com.frameMyMoments.model.dao;
+package com.frameMyMoments.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -16,11 +16,11 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne()
-    @JoinColumn()
+    @JoinColumn(name = "product_id")
     @JsonProperty()
     private Product product;
     @ManyToOne()
-    @JoinColumn()
+    @JoinColumn(name = "session_id")
     @JsonProperty()
     private ShoppingSession session;
     private Long quantity;
