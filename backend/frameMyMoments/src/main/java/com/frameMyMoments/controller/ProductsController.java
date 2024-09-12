@@ -14,10 +14,10 @@ public class ProductsController {
     public ResponseEntity<?> getAllProducts(){
         return null;
     }
-//    @GetMapping("/test")
-//    public String test(){
-//        return "working";
-//    }
+    @GetMapping("/test")
+    public String test(){
+        return "working";
+    }
 
     @GetMapping("/all/{id}")
     public ResponseEntity<?> getProduct(@PathVariable("id") Long productId){

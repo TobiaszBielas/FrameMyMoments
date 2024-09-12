@@ -63,7 +63,7 @@ public class CartItemService implements ICartItemService {
 
     @Override
     public List<CartItemDTO> getCartItemsBySessionId(Long sessionId) {
-        List<CartItem> cartItems = cartItemRepository.findByShoppingSessionId(sessionId);
+        List<CartItem> cartItems = cartItemRepository.findBySessionId(sessionId);
         return cartItems.stream().map(CartItemDTO::fromEntity).collect(Collectors.toList());
     }
 }
