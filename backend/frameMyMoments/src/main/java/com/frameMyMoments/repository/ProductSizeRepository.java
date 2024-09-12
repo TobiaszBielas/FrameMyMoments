@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductSizeRepository extends JpaRepository<ProductSize, Long> {
+    ProductSize findByHeightAndWidthAndDiameter(Float height, Float width, Float diameter);
 }
