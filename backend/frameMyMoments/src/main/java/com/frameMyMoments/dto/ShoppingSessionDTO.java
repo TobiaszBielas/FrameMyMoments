@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 public class ShoppingSessionDTO {
     private Long id;
     private Long userId;
+//    private boolean status;
     private BigDecimal totalPrice;
 
     public static ShoppingSessionDTO fromEntity(ShoppingSession shoppingSession) {

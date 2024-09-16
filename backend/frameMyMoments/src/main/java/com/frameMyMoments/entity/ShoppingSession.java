@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
+@Getter
 @Entity
 @Table(name = "SHOPPING_SESSION")
 @Data
@@ -19,5 +20,6 @@ public class ShoppingSession {
     @JoinColumn(name = "user_id")
     @JsonProperty()
     private User user;
+//    private boolean status;
     private BigDecimal totalPrice;
 }
