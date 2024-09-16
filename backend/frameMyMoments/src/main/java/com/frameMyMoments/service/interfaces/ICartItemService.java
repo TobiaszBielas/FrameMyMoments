@@ -10,4 +10,6 @@ public interface ICartItemService {
     CartItemDTO updateCartItem(Long id, CartItemDTO cartItemDTO);
     void deleteCartItem(Long id);
     List<CartItemDTO> getCartItemsBySessionId(Long sessionId);
+
+    CartItemDTO addItemToCart(CartItemDTO cartItemDTO);
 }

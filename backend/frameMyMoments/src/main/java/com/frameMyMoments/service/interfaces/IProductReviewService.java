@@ -10,4 +10,6 @@ public interface IProductReviewService {
     ProductReviewDTO updateProductReview(Long id, ProductReviewDTO productReviewDTO);
     void deleteProductReview(Long id);
     List<ProductReviewDTO> getAllProductReviews();
+
+    List<ProductReviewDTO> getReviewsByProductId(Long productId);
 }

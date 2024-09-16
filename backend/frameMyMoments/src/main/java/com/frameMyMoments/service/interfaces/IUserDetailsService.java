@@ -10,4 +10,6 @@ public interface IUserDetailsService {
     UserDetailsDTO updateUserDetails(Long id, UserDetailsDTO userDetailsDTO);
     void deleteUserDetails(Long id);
     List<UserDetailsDTO> getAllUserDetails();
+
+    UserDetailsDTO getUserDetailsByUserId(Long userId);
 }

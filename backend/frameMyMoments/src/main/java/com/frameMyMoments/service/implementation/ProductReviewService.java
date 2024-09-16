@@ -7,6 +7,7 @@ import com.frameMyMoments.repository.ProductReviewRepository;
 import com.frameMyMoments.repository.ProductsRepository;
 import com.frameMyMoments.service.interfaces.IProductReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,5 +59,25 @@ public class ProductReviewService implements IProductReviewService {
     public List<ProductReviewDTO> getAllProductReviews() {
         List<ProductReview> reviews = productReviewRepository.findAll();
         return reviews.stream().map(ProductReviewDTO::fromEntity).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductReviewDTO> getReviewsByProductId(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + productId));
+
+        List<ProductReview> reviews = productReviewRepository.findAllByProductId(productId);
+
+        return reviews.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    private ProductReviewDTO mapToDTO(ProductReview productReview) {
+        return ProductReviewDTO.builder()
+                .id(productReview.getId())
+                .productId(productReview.getProduct().getId())
+                .review(productReview.getReview())
+                .build();
     }
 }

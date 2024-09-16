@@ -3,10 +3,12 @@ package com.frameMyMoments.dto;
 import com.frameMyMoments.entity.User;
 import com.frameMyMoments.entity.UserDetails;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class UserDetailsDTO {

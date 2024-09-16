@@ -7,6 +7,7 @@ import com.frameMyMoments.repository.UserDetailsRepository;
 import com.frameMyMoments.repository.UserRepository;
 import com.frameMyMoments.service.interfaces.IUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,5 +59,31 @@ public class UserDetailsService implements IUserDetailsService {
     public List<UserDetailsDTO> getAllUserDetails() {
         List<UserDetails> userDetailsList = userDetailsRepository.findAll();
         return userDetailsList.stream().map(UserDetailsDTO::fromEntity).collect(Collectors.toList());
+    }
+
+    @Override
+    public UserDetailsDTO getUserDetailsByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
+
+        UserDetails userDetails = userDetailsRepository.findByUserId(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("UserDetails not found for user with id " + userId));
+
+        return mapToDTO(userDetails);
+    }
+
+    private UserDetailsDTO mapToDTO(UserDetails userDetails) {
+        return UserDetailsDTO.builder()
+                .id(userDetails.getId())
+                .userId(userDetails.getUser().getId())
+                .firstName(userDetails.getFirstName())
+                .lastName(userDetails.getLastName())
+                .phoneNumber(userDetails.getPhoneNumber())
+                .postalCode(userDetails.getPostalCode())
+                .city(userDetails.getCity())
+                .street(userDetails.getStreet())
+                .houseNumber(userDetails.getHouseNumber())
+                .flatNumber(userDetails.getFlatNumber())
+                .build();
     }
 }

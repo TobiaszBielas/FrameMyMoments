@@ -9,6 +9,7 @@ import com.frameMyMoments.repository.ProductsRepository;
 import com.frameMyMoments.repository.ShoppingSessionRepository;
 import com.frameMyMoments.service.interfaces.ICartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,5 +66,33 @@ public class CartItemService implements ICartItemService {
     public List<CartItemDTO> getCartItemsBySessionId(Long sessionId) {
         List<CartItem> cartItems = cartItemRepository.findBySessionId(sessionId);
         return cartItems.stream().map(CartItemDTO::fromEntity).collect(Collectors.toList());
+    }
+
+    @Override
+    public CartItemDTO addItemToCart(CartItemDTO cartItemDTO) {
+        ShoppingSession shoppingSession = shoppingSessionRepository.findById(cartItemDTO.getSessionId())
+                .orElseThrow(() -> new ResourceNotFoundException("Shopping session not found with id " + cartItemDTO.getSessionId()));
+
+        Product product = productRepository.findById(cartItemDTO.getProductId())
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + cartItemDTO.getProductId()));
+
+        CartItem cartItem = CartItem.builder()
+                .product(product)
+                .session(shoppingSession)
+                .quantity(cartItemDTO.getQuantity())
+                .build();
+
+        CartItem savedCartItem = cartItemRepository.save(cartItem);
+
+        return mapToDTO(savedCartItem);
+    }
+
+    private CartItemDTO mapToDTO(CartItem cartItem) {
+        return CartItemDTO.builder()
+                .id(cartItem.getId())
+                .productId(cartItem.getProduct().getId())
+                .sessionId(cartItem.getSession().getId())
+                .quantity(cartItem.getQuantity())
+                .build();
     }
 }

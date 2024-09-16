@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,5 +59,10 @@ public class ShoppingSessionService implements IShoppingSessionService {
     public List<ShoppingSessionDTO> getAllShoppingSessions() {
         List<ShoppingSession> sessions = shoppingSessionRepository.findAll();
         return sessions.stream().map(ShoppingSessionDTO::fromEntity).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<ShoppingSession> getSessionByUserId(Long userId) {
+        return shoppingSessionRepository.findByUserId(userId);
     }
 }

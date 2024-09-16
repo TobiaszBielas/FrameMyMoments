@@ -3,10 +3,12 @@ package com.frameMyMoments.dto;
 import com.frameMyMoments.entity.Product;
 import com.frameMyMoments.entity.ProductReview;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ProductReviewDTO {
